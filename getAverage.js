@@ -8,28 +8,19 @@ fs.createReadStream('C:/Indian_Bay_Ecosystem_Corporation.csv')
             let key = data.MonitoringLocationID;
             if(resultData[key]){
                 let nextDeg = parseFloat(resultData[key].deg) + parseFloat(data.ResultValue);
-                resultData[key].deg = nextDeg.toFixed(5);
+                resultData[key].deg = nextDeg;
                 resultData[key].count += 1;
-                resultData[key].average = parseFloat(nextDeg/resultData[key].count).toFixed(5);
+                resultData[key].average = parseFloat(nextDeg/resultData[key].count);
             }else{
                 var information = {}
-                information.deg=parseFloat(data.ResultValue).toFixed(5);
+                information.deg=parseFloat(data.ResultValue);
                 information.count=1;
-                information.average=parseFloat(data.ResultValue).toFixed(5);
+                information.average=parseFloat(data.ResultValue);
                 resultData[key] = information;
             }
-
         };
-   
-
-
 
   })
   .on('end', () => {
- 
     console.log(resultData);
-    //console.log(resultValueSum);
-    //console.log(resultValueSumCount);
-    //console.log((resultValueSum / resultValueSumCount).toFixed(2));
-   // console.log(results[0]['Lowest Selling Price'])
   });
